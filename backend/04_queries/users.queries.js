@@ -1,12 +1,13 @@
 
 // obtenemos todos los usuarios
 const getAllUsers = `
-    SELECT * FROM users;
+    SELECT * FROM usuarios
+    ORDER BY usuario_id ASC;
 `;
 
 // obtenemos un usuario por id
 const getUserById = `
-    SELECT * FROM users WHERE id_user = $1;
+    SELECT * FROM usuarios WHERE usuario_id = $1;
 `;
 
 const findUserByUsername = `
@@ -23,19 +24,19 @@ const getUserByEmail = `
 
 // creamos un nuevo usuario
 const createUser = `
-    INSERT INTO users (nombre, email, password, role)
-    VALUES ($1, $2, $3, $4) 
-    RETURNING id_user, nombre, email, role;
+    INSERT INTO usuarios (pais, genero, orientacion, zip, edad)
+    VALUES ($1, $2, $3, $4, $5) 
+    RETURNING usuario_id, pais, genero, orientacion, zip, edad;
 `;
 
 // actualizar un usuario
 const updateUser = `
-    UPDATE users SET nombre = $1, email = $2 WHERE id_user = $3 RETURNING *;
+    UPDATE usuarios SET pais = $1, genero = $2 WHERE usuario_id = $3 RETURNING *;
 `;
 
 // eliminar un usuario
 const deleteUser = `
-    DELETE FROM users WHERE id_user = $1 RETURNING *;
+    DELETE FROM usuarios WHERE usuario_id = $1 RETURNING *;
 `;
 
 module.exports = {
