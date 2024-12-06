@@ -10,4 +10,8 @@ router.use('/auth', authRoutes);
 const usersRoutes = require('./users.routes');
 router.use('/users', usersRoutes);
 
+// PROFESIONALES
+const profesionalesRoutes = require('./profesionales.routes');
+router.use('/profesionales', profesionalesRoutes);
+
 module.exports = router;

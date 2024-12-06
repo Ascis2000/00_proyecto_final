@@ -38,25 +38,23 @@ exports.findUserByUsername = async (nombre) => {
 };
 
 // crear un nuevo usuario
-exports.createUser = async (nombre, email, password, role = 1) => {
+exports.createUser = async (pais, genero, orientacion, zip, edad, usuario_id) => {
+    // Los valores se toman directamente de los parámetros
+    const values = [
+        pais, 
+        genero, 
+        orientacion,
+        zip,
+        edad
+    ];
+    
     try {
-        // Encriptar la contraseña antes de almacenarla
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-        // Ejecutar la consulta de inserción en la base de datos
-        const result = await db.query(queries.createUser, [nombre, email, hashedPassword, role]);
-
-        // Verifica si la respuesta contiene filas (rows)
-        if (!result || !result.rows || result.rows.length === 0) {
-            throw new Error('No se pudo registrar el usuario. No se obtuvo una respuesta válida de la base de datos.');
-        }
-
-        // Retorna el primer usuario creado
-        return result.rows[0];  // Retorna el usuario creado con sus datos
+        const result = await db.query(queries.createUser, values);
+        console.log(result);
+        return result.rows[0];
     } catch (error) {
         console.error('Error al crear usuario:', error);
-        throw error;  // Lanza el error para que el controlador lo pueda manejar
+        throw error;
     }
 };
 

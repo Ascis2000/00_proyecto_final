@@ -12,10 +12,18 @@ const authorizeRole = require('../middlewares/roleMiddleware');
 router.get('/admin/dashboard', authMiddleware, authorizeRole('admin'), mostrarAdmin); */
 
 // definimos las rutas para los usuarios
-router.get('/', usersController.getAllUsers);        // GET /users
-router.get('/:id', usersController.getUserById);     // GET /users/:id
-router.post('/', usersController.createUser);        // POST /users
-router.put('/:id', usersController.updateUser);      // PUT /users/:id
-router.delete('/:id', usersController.deleteUser);   // DELETE /users/:id
+// Ejemplo: http://localhost:3000/api/users/
+router.get('/', usersController.getAllUsers); 
+
+// Ejemplo: http://localhost:3000/api/users/1
+router.get('/:id', usersController.getUserById); 
+
+// Ejemplo: http://localhost:3000/api/users/create
+router.post('/create', usersController.createUser);
+
+router.put('/:id', usersController.updateUser); 
+
+// Ejemplo: http://localhost:3000/api/users/delete/1
+router.delete('/delete/:id', usersController.deleteUser);
 
 module.exports = router;
