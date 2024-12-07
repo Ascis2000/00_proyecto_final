@@ -38,13 +38,13 @@ exports.findUserByUsername = async (nombre) => {
 };
 
 // crear un nuevo usuario
-exports.createUser = async (pais, genero, orientacion, zip, edad, usuario_id) => {
+exports.createUser = async (pais, genero, orien_sex, ciudad, edad, usuario_id) => {
     // Los valores se toman directamente de los parámetros
     const values = [
         pais, 
         genero, 
-        orientacion,
-        zip,
+        orien_sex,
+        ciudad,
         edad
     ];
     
