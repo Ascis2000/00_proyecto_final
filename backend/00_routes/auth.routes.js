@@ -7,7 +7,7 @@ const authController = require('../01_controllers/auth.controller');
 
 // definimos las rutas para las autenticaciones
 router.get('/login', authController.login);         // GET /login
-router.post('/login', authController.login);        // POST /register
+router.post('/login', authController.login);        // POST 
 router.get('/logout', authController.logout);       // PUT /users/:id
 
 module.exports = router;
