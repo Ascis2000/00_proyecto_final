@@ -24,9 +24,9 @@ const getUserByEmail = `
 
 // creamos un nuevo usuario
 const createUser = `
-    INSERT INTO usuarios (pais, genero, orientacion, zip, edad)
+    INSERT INTO usuarios (pais, genero, orien_sex, ciudad, edad)
     VALUES ($1, $2, $3, $4, $5) 
-    RETURNING usuario_id, pais, genero, orientacion, zip, edad;
+    RETURNING usuario_id, pais, genero, orien_sex, ciudad, edad;
 `;
 
 // actualizar un usuario
