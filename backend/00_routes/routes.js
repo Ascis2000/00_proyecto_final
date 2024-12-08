@@ -14,4 +14,8 @@ router.use('/users', usersRoutes);
 const profesionalesRoutes = require('./profesionales.routes');
 router.use('/profesionales', profesionalesRoutes);
 
+// PREGUNTAS
+const preguntasRoutes = require('./preguntas.routes');
+router.use('/preguntas', preguntasRoutes);
+
 module.exports = router;
