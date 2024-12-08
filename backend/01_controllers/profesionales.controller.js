@@ -33,10 +33,10 @@ const getProfesionalById = async (req, res) => {
 // POST
 // crear un nuevo profesional
 const createProfesional = async (req, res) => {
-    const { ciudad, zip, ambito_laboral, especialidad } = req.body;
+    const { provincia, cod_postal, ambito, especialidad } = req.body;
 
     try {
-        const newProfesional = await profesionalesModel.createProfesional(ciudad, zip, ambito_laboral, especialidad);
+        const newProfesional = await profesionalesModel.createProfesional(provincia, cod_postal, ambito, especialidad);
         res.status(201).json(newProfesional);
     } catch (error) {
         res.status(500).json({ message: 'Error al crear el profesional', error });

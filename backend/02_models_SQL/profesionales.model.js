@@ -24,12 +24,12 @@ exports.getProfesionalById = async (id) => {
 };
 
 // crear un nuevo profesional
-exports.createProfesional = async (ciudad, zip, ambito_laboral, especialidad) => {
+exports.createProfesional = async (provincia, cod_postal, ambito, especialidad) => {
     // Los valores se toman directamente de los parámetros
     const values = [
-        ciudad, 
-        zip, 
-        ambito_laboral,
+        provincia, 
+        cod_postal, 
+        ambito,
         especialidad
     ];
     
