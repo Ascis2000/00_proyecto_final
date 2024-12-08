@@ -1,8 +1,17 @@
 
 // obtenemos todos los profesionales
 const getAllProfesionales = `
-    SELECT * FROM profesionales
-    ORDER BY profesional_id ASC;
+    SELECT 
+    p.provincia AS ciudad,
+    a.ambito,
+    e.especialidad
+FROM 
+    profesionales p
+JOIN 
+    especialidades e ON p.especialidad_id = e.especialidad_id
+JOIN 
+    ambitos a ON e.ambito_id = a.ambito_id;
+
 `;
 
 // obtenemos un profesional por id
