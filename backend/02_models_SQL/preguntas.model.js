@@ -52,10 +52,21 @@ exports.createPregunta = async (pregunta, rol) => {
 };
 
 // actualizar una pregunta
-exports.updatePregunta = async (pregunta, rol) => {
+exports.updatePregunta = async (pregunta, id) => {
     try {
-        const { rows } = await db.query(queries.updatePregunta, [pregunta, rol]);
-        return rows[0]; 
+        // Consulta SQL para actualizar el texto de la pregunta
+        const query = 'UPDATE preguntas SET pregunta = $1 WHERE pregunta_id = $2 RETURNING *';
+        
+        // Ejecutar la consulta con los parámetros correspondientes
+        const { rows } = await db.query(query, [pregunta, id]);
+
+        // Si no se encuentra la pregunta con ese ID, devolver null
+        if (rows.length === 0) {
+            return null;
+        }
+
+        // Devolver la pregunta actualizada
+        return rows[0];
     } catch (error) {
         throw error;
     }
