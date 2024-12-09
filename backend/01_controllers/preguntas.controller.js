@@ -62,14 +62,24 @@ const createPregunta = async (req, res) => {
 // PUT
 // actualizar un pregunta
 const updatePregunta = async (req, res) => {
-    const { id } = req.params;
-    const { pais, zip } = req.body;
+    const { id } = req.params;  // ID de la pregunta en la URL
+    const { pregunta } = req.body;  // Nuevo texto de la pregunta desde el cuerpo
+
+    // Asegurarse de que se ha recibido un nuevo texto para la pregunta
+    if (!pregunta) {
+        return res.status(400).json({ message: 'El texto de la pregunta es obligatorio' });
+    }
 
     try {
-        const updatedPregunta = await preguntasModel.updatePregunta(pais, zip, id);
+        // Llamar al modelo para actualizar la pregunta
+        const updatedPregunta = await preguntasModel.updatePregunta(pregunta, id);
+
+        // Si no se encuentra la pregunta, devolver error 404
         if (!updatedPregunta) {
-            return res.status(404).json({ message: 'pregunta no encontrada' });
+            return res.status(404).json({ message: 'Pregunta no encontrada' });
         }
+
+        // Responder con la pregunta actualizada
         res.status(200).json(updatedPregunta);
     } catch (error) {
         res.status(500).json({ message: 'Error al actualizar la pregunta', error });
