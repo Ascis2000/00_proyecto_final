@@ -32,10 +32,10 @@ const getUserById = async (req, res) => {
 // POST
 // crear un nuevo usuario
 const createUser = async (req, res) => {
-    const { pais, genero, orien_sex, ciudad, edad } = req.body;
+    const { pais, genero, orien_sex, provincia, edad } = req.body;
 
     try {
-        const newUser = await usersModel.createUser(pais, genero, orien_sex, ciudad, edad);
+        const newUser = await usersModel.createUser(pais, genero, orien_sex, provincia, edad);
         res.status(201).json(newUser);
     } catch (error) {
         res.status(500).json({ message: 'Error al crear el usuario', error });
