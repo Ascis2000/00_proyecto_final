@@ -18,4 +18,8 @@ router.use('/profesionales', profesionalesRoutes);
 const preguntasRoutes = require('./preguntas.routes');
 router.use('/preguntas', preguntasRoutes);
 
+// PREGUNTAS
+const respuestasRoutes = require('./respuestas.routes');
+router.use('/respuestas', respuestasRoutes);
+
 module.exports = router;
