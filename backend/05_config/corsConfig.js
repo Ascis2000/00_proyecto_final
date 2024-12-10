@@ -1,4 +1,3 @@
-
 const allowedOrigins = [
     'http://localhost:5173', // Desarrollo
     'https://00proyectofinalfrontend1.netlify.app', // Producción en Netlify
@@ -7,6 +6,7 @@ const allowedOrigins = [
 
 const corsOptions = {
     origin: (origin, callback) => {
+        // Verifica si el origen es uno de los permitidos
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true); // Origen permitido
         } else {
@@ -14,8 +14,8 @@ const corsOptions = {
         }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-    credentials: true
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'], // Asegúrate de permitir 'Cookie'
+    credentials: true, // Esto es necesario para permitir el envío de cookies
 };
 
 module.exports = corsOptions;
