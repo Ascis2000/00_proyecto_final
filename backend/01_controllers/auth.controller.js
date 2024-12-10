@@ -1,4 +1,3 @@
-
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const authModel = require('../02_models_SQL/auth.model');
@@ -29,10 +28,18 @@ const login = async (req, res) => {
     }
 };
 
+
 function logout(req, res) {
-    res.clearCookie('token');
-    res.redirect('/');
+    console.log('hola')
+
+    res.clearCookie('token', {
+        httpOnly: false,   // Mismo valor que en el login
+        sameSite: 'strict', // Mismo valor que en el login
+        path: '/',         // Mismo valor que en el login
+    });
+    res.status(200).json({ success: true, msg: 'Logout exitoso' });
 }
+
 
 const mostrarUser = async (req, res) => {
     try {
