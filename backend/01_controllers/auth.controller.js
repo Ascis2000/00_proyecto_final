@@ -14,9 +14,10 @@ const login = async (req, res) => {
             const token = createToken(user);
 
             res.cookie("token", token, {
-                httpOnly: false,
-                sameSite: 'None',
-                path: '/',
+                httpOnly: true,  // Asegúrate de que sea solo accesible por el servidor
+                sameSite: 'None', // Permite solicitudes cross-origin
+                secure: true,    // Requiere HTTPS
+                path: '/',       // Ruta base
             })
             .status(200)
             .json({ success: true, ...user });
