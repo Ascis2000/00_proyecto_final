@@ -18,7 +18,8 @@ const getPreguntaRespuestasById = `
         p.pregunta AS pregunta,
         r.respuesta_id,
         r.respuesta,
-        r.rol
+        r.rol,
+        r.fin
 
     FROM public.preguntas_respuestas pr
         JOIN public.respuestas r
