@@ -13,14 +13,23 @@ const login = async (req, res) => {
         if (user) {
             const token = createToken(user);
 
-            res.cookie("token", token, {
-                httpOnly: true,  // Asegúrate de que sea solo accesible por el servidor
-                sameSite: 'None', // Permite solicitudes cross-origin
-                secure: true,    // Requiere HTTPS
-                path: '/',       // Ruta base
-            })
-            .status(200)
-            .json({ success: true, ...user });
+            // Condicional para diferenciar el entorno local y de producción
+            const cookieOptions = process.env.NODE_ENV === 'production'
+                ? {
+                    httpOnly: true,
+                    sameSite: 'None', // Permite el envío de cookies entre diferentes dominios en producción
+                    secure: true,     // Requiere HTTPS en producción
+                    path: '/',
+                }
+                : {
+                    httpOnly: true,
+                    sameSite: 'Strict', // Solo permite la cookie en el mismo dominio
+                    path: '/',
+                };
+
+            res.cookie('token', token, cookieOptions)
+                .status(200)
+                .json({ success: true, ...user });
         } else {
             res.status(400).json({ success: false, msg: "Credenciales incorrectas" });
         }
